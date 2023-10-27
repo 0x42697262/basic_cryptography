@@ -1,8 +1,16 @@
-[package]
-name = "basic_cryptography"
-version = "0.1.0"
-edition = "2021"
+[workspace]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+members = [
+  "base64",
+  "fixed_xor"
+]
+resolver = "2"
 
-[dependencies]
+[profile.release]
+
+opt-level = 3         # All optimizations
+strip = "symbols"     # Strip symbols from a binary
+lto = true            # Attempts to perform optimizations across all crates within the dependency graph
+panic = "abort"       # Terminate the process upon panic
+codegen-units = 1     # Controls how many “code generation units” a crate will be split into
+debug = false
